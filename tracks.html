@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify - TRACKS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: none;
+        }
+        .site-name {
+            font-size: 25px;
+            color: #CCD6F6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1{
+            color: rgb(98, 226, 226);
+        }
+        .roadmap-section {
+            background: none;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        .roadmap-card {
+            background: rgba(255, 255, 255, 0.047);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .roadmap-card h2 {
+            margin-top: 0;
+        }
+        button {
+            background: teal;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: darkcyan;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // تشغيل تأثير الدخول عند تحميل الصفحة
+    document.body.classList.add("loaded");
+
+    // إضافة تأثير الخروج عند الضغط على أي رابط
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault(); // منع الانتقال الفوري
+            let targetUrl = this.href; // حفظ الرابط اللي المفروض يروح له
+
+            // إضافة كلاس الأنيميشن
+            document.body.classList.add("fade-out");
+
+            // انتظار نصف ثانية ثم الانتقال للصفحة
+            setTimeout(() => {
+                window.location.href = targetUrl;
+                             }, 500);
+                             });
+                        });
+                       });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="home.html" class="site-name">CODIFY</a>
+        </div>
+    </header>
+    <main class="container">
+        <section class="roadmap-section">
+            <h1>Tracks</h1>
+            <p>Explore different roadmaps and shape your learning path</p>
+            <div class="roadmap-card">
+                <h2>Front-End</h2>
+                <p>The Front-End is responsible for designing and developing the visual and interactive aspects of a website or web application. It ensures that users can navigate and interact with the site smoothly by implementing HTML, CSS, and JavaScript. A Front-End developer focuses on responsiveness, accessibility, and performance to create a seamless user experience. They also collaborate with UI/UX designers to bring designs to life and with Back-End developers to connect the interface with data and functionality. Ultimately, Front-End development plays a crucial role in making websites both visually appealing and highly functional.</p>
+                <a href="roadmaps.html#frontend"><button>FRONT-END</button></a>
+            </div>
+            <div class="roadmap-card">
+                <h2>Back-End</h2>
+                <p>The Back-End is responsible for managing the server, database, and application logic that power a website or web application. It ensures that data is processed, stored, and retrieved efficiently using technologies like Node.js, Python, PHP, or Java. A Back-End developer focuses on security, performance, and scalability to handle user requests smoothly. They collaborate with Front-End developers to connect the user interface with the server-side logic and with database administrators to manage data storage. Ultimately, Back-End development plays a crucial role in ensuring websites function correctly and handle data securely.</p>
+                <a href="roadmaps.html#backend"><button>BACK-END</button></a>
+            </div>
+            <div class="roadmap-card">
+                <h2>Cyber Security</h2>
+                <p>Cybersecurity is responsible for protecting systems, networks, and data from cyber threats, ensuring the confidentiality, integrity, and availability of information. It involves implementing security measures such as encryption, firewalls, and intrusion detection to prevent attacks. Cybersecurity professionals focus on identifying vulnerabilities, mitigating risks, and responding to security incidents using tools like SIEM, penetration testing, and threat intelligence. They collaborate with developers, IT teams, and businesses to create secure infrastructures and comply with industry standards. Ultimately, cybersecurity plays a crucial role in safeguarding digital assets and maintaining trust in technology.</p>
+                <a href="roadmaps.html#cybersecurity"><button>CYBER SECURITY</button></a>
+            </div>
+            <div class="roadmap-card">
+                <h2>Data Science</h2>
+                <p>Data Science is responsible for extracting meaningful insights from large volumes of structured and unstructured data using statistical methods, machine learning, and data visualization. It involves data collection, cleaning, analysis, and modeling with technologies like Python, R, SQL, and big data frameworks. A Data Scientist focuses on discovering patterns, making predictions, and driving data-driven decisions for businesses. They collaborate with engineers, analysts, and stakeholders to solve complex problems and improve efficiency. Ultimately, Data Science plays a crucial role in transforming raw data into actionable intelligence for various industries.</p>
+                <a href="roadmaps.html#datascience"><button>DATA SCIENCE</button></a>
+            </div>
+            <div class="roadmap-card">
+                <h2>Mobile App</h2>
+                <p>Mobile App Development is responsible for building cross-platform applications that run on both iOS and Android devices using frameworks like React Native and Flutter. It involves designing user interfaces, handling performance optimization, and integrating APIs to provide a seamless user experience. A Mobile App Developer focuses on creating responsive, scalable, and feature-rich applications while ensuring compatibility across different devices. They collaborate with designers, back-end developers, and QA testers to refine app functionality. Ultimately, Mobile App Development plays a crucial role in delivering high-quality mobile experiences that enhance user engagement and business growth.</p>
+                <a href="roadmaps.html#mobileapp"><button>MOBILE APP</button></a>
+            </div>
+            <div class="roadmap-card">
+                <h2>DevOps</h2>
+                <p>DevOps is responsible for bridging the gap between software development and IT operations, ensuring faster and more reliable software delivery. It involves automating infrastructure, continuous integration and deployment (CI/CD), and monitoring system performance using tools like Docker, Kubernetes, Jenkins, and Terraform. A DevOps engineer focuses on improving collaboration, efficiency, and scalability by integrating development and operations processes. They work closely with developers, system administrators, and security teams to optimize deployment pipelines and ensure system reliability. Ultimately, DevOps plays a crucial role in streamlining software development, reducing downtime, and enhancing productivity.</p>
+                <a href="roadmaps.html#devops"><button>DEVOPS</button></a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

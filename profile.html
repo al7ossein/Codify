@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Codify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+            min-height: calc(100vh - 40px);
+        }
+
+        .sidebar {
+            background: rgba(17, 34, 64, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .user-info {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            background: linear-gradient(45deg, #00e5c0, #00a3e0);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .user-name {
+            font-size: 1.5rem;
+            color: #00e5c0;
+            margin-bottom: 5px;
+        }
+
+        .user-email {
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .user-joined {
+            font-size: 0.8rem;
+            color: #8892b0;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 229, 192, 0.1);
+            color: #00e5c0;
+            transform: translateY(-2px);
+        }
+
+        .logout {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            margin-top: auto;
+        }
+
+        .logout:hover {
+            background: rgba(220, 53, 69, 0.2);
+            color: #ff4444;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(17, 34, 64, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            height: fit-content;
+        }
+
+        .card h2 {
+            color: #00e5c0;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-item, .quiz-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .progress-item:hover, .quiz-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .progress-item h3, .quiz-item h3 {
+            color: #00e5c0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #00e5c0, #00a3e0);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-score {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .passed {
+            color: #4CAF50;
+        }
+
+        .failed {
+            color: #dc3545;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            color: #00e5c0;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            color: #00e5c0;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 3px solid #00e5c0;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                gap: 15px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <h2 class="user-name" id="userName">Loading...</h2>
+                <div class="user-email" id="userEmail"></div>
+                <div class="user-joined" id="userJoined"></div>
+            </div>
+            <a href="home.html" class="nav-button">Home</a>
+            <a href="tracks.html" class="nav-button">Tracks</a>
+            <a href="roadmaps.html" class="nav-button">Roadmaps</a>
+            <a href="quizzes.html" class="nav-button">Quizzes</a>
+            <a href="leaderboard.html" class="nav-button">Leaderboard</a>
+            <button class="nav-button logout" onclick="logout()">Logout</button>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Course Progress</h2>
+                <div id="progressContent">
+                    <div class="loading">Loading...</div>
+                </div>
+                <div class="stats" id="courseStats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="completedCourses">0</div>
+                        <div class="stat-label">Completed Courses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="inProgressCourses">0</div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Quiz Results</h2>
+                <div id="quizContent">
+                    <div class="loading">Loading...</div>
+                </div>
+                <div class="stats" id="quizStats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="passedQuizzes">0</div>
+                        <div class="stat-label">Passed Quizzes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="averageScore">0%</div>
+                        <div class="stat-label">Average Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5050';
+        let isReconnecting = false;
+
+        // دالة للتحقق من اتصال الخادم
+        async function checkServer() {
+            try {
+                const response = await fetch(`${API_URL}/api/health`, { timeout: 5000 });
+                if (!response.ok) {
+                    throw new Error('Server not responding');
+                }
+                if (isReconnecting) {
+                    isReconnecting = false;
+                    loadProfileData(); // إعادة تحميل البيانات بعد إعادة الاتصال
+                }
+            } catch (error) {
+                if (!isReconnecting) {
+                    console.log('Lost connection to server. Trying other ports...');
+                    isReconnecting = true;
+                }
+                // محاولة الاتصال بمنافذ مختلفة
+                for (let port = 8000; port <= 9000; port++) {
+                    try {
+                        const testUrl = `http://localhost:${port}/api/health`;
+                        const response = await fetch(testUrl, { timeout: 1000 });
+                        if (response.ok) {
+                            API_URL = `http://localhost:${port}`;
+                            console.log(`Connected to new port: ${port}`);
+                            loadProfileData();
+                            break;
+                        }
+                    } catch (e) {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        // التحقق من اتصال الخادم كل 30 ثانية
+        setInterval(checkServer, 30000);
+
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token || !token.startsWith('Bearer ')) {
+                console.log('No token found or invalid token format');
+                window.location.href = 'Login&Signup.html';
+                return null;
+            }
+            return token;
+        }
+
+        function logout() {
+            // مسح بيانات المستخدم من التخزين المحلي
+            localStorage.removeItem('token');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
+            
+            // التوجيه إلى صفحة تسجيل الدخول
+            window.location.href = 'Login&Signup.html';  // تصحيح مسار التوجيه
+        }
+
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .map(word => word[0])
+                .join('')
+                .substring(0, 2);
+        }
+
+        function updateUserInfo(user) {
+            document.getElementById('userAvatar').textContent = getInitials(user.name);
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('userJoined').textContent = `Joined ${new Date(user.created_at).toLocaleDateString()}`;
+        }
+
+        function updateStats(progress, quizResults) {
+            // Course statistics
+            const completed = progress.filter(p => p.completed).length;
+            const inProgress = progress.length - completed;
+            document.getElementById('completedCourses').textContent = completed;
+            document.getElementById('inProgressCourses').textContent = inProgress;
+
+            // Quiz statistics
+            const passed = quizResults.filter(q => q.passed).length;
+            const averageScore = quizResults.length > 0
+                ? Math.round(quizResults.reduce((acc, q) => acc + q.score, 0) / quizResults.length)
+                : 0;
+            document.getElementById('passedQuizzes').textContent = passed;
+            document.getElementById('averageScore').textContent = `${averageScore}%`;
+        }
+
+        async function loadProfileData() {
+            const token = checkAuth();
+            if (!token) return;
+            
+            try {
+                console.log('Fetching profile data...');
+                const response = await fetch(`${API_URL}/api/profile`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('Profile response status:', response.status);
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        console.log('Unauthorized access, redirecting to login');
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('userName');
+                        localStorage.removeItem('userEmail');
+                        window.location.href = 'Login&Signup.html';
+                        return;
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Profile data received:', data);
+
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                updateUserInfo(data.user);
+                displayProgress(data.progress);
+                displayQuizResults(data.quiz_results);
+                updateStats(data.progress, data.quiz_results);
+                
+                // إخفاء رسالة الخطأ إذا كانت موجودة
+                const errorMessage = document.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.remove();
+                }
+            } catch (error) {
+                console.error('Profile loading error:', error);
+                showError('Failed to load profile data. Please try again.');
+            }
+        }
+
+        function displayProgress(progress) {
+            const progressContent = document.getElementById('progressContent');
+            if (!progress || progress.length === 0) {
+                progressContent.innerHTML = '<p style="text-align: center; color: #8892b0;">No courses started yet.</p>';
+                return;
+            }
+
+            progressContent.innerHTML = progress.map(p => `
+                <div class="progress-item">
+                    <h3>${p.course}</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${p.score}%"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                        <span>Progress: ${p.score}%</span>
+                        <span style="color: ${p.completed ? '#4CAF50' : '#8892b0'}">
+                            ${p.completed ? 'Completed' : 'In Progress'}
+                        </span>
+                    </div>
+                    ${p.last_updated ? `
+                        <div style="color: #8892b0; font-size: 0.9rem; margin-top: 5px;">
+                            Last Updated: ${new Date(p.last_updated).toLocaleDateString()}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function displayQuizResults(results) {
+            const quizContent = document.getElementById('quizContent');
+            if (!results || results.length === 0) {
+                quizContent.innerHTML = '<p style="text-align: center; color: #8892b0;">No quizzes taken yet.</p>';
+                return;
+            }
+
+            quizContent.innerHTML = results.map(q => `
+                <div class="quiz-item">
+                    <h3>${q.course}</h3>
+                    <p style="color: #8892b0;">Track: ${q.track}</p>
+                    <div class="quiz-score ${q.passed ? 'passed' : 'failed'}">
+                        ${q.score}% ${q.passed ? '(Passed)' : '(Failed)'}
+                    </div>
+                    <div style="color: #8892b0; font-size: 0.9rem;">
+                        Date Taken: ${new Date(q.date_taken).toLocaleDateString()}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showError(message) {
+            // إزالة أي رسائل خطأ سابقة
+            const existingError = document.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `
+                ${message}
+                <div>
+                    <button onclick="retryLoading()" style="margin-right: 10px; background: #00e5c0; padding: 5px 15px; border-radius: 5px; border: none; cursor: pointer;">Retry</button>
+                    <button class="close-button" onclick="this.parentElement.parentElement.remove()">×</button>
+                </div>
+            `;
+            document.body.insertBefore(errorDiv, document.body.firstChild);
+        }
+
+        // إضافة دالة لإعادة المحاولة
+        function retryLoading() {
+            const errorMessage = document.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.remove();
+            }
+            loadProfileData();
+        }
+
+        // تحميل البيانات عند فتح الصفحة
+        document.addEventListener('DOMContentLoaded', loadProfileData);
+    </script>
+</body>
+</html>

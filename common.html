@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify - Shared Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: none;
+        }
+        .site-name {
+            font-size: 25px;
+            color: #CCD6F6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 350px;
+            height: 180px;
+        }
+
+        .circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .circle1 {
+            background-color: #4ecdc4;
+            left: 20px;
+            top: 15px;
+        }
+
+        .circle2 {
+            background-color: #41729f;
+            right: 20px;
+            top: 15px;
+        }
+
+        .shared {
+            background-color: #50b38f49;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+
+        .description {
+            width: 60%;
+            font-size: 14px;
+            margin: 20px auto;
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // تشغيل تأثير الدخول عند تحميل الصفحة
+    document.body.classList.add("loaded");
+
+    // إضافة تأثير الخروج عند الضغط على أي رابط
+    document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", function (e) {
+            e.preventDefault(); // منع الانتقال الفوري
+            let targetUrl = this.href; // حفظ الرابط اللي المفروض يروح له
+
+            // إضافة كلاس الأنيميشن
+            document.body.classList.add("fade-out");
+
+            // انتظار نصف ثانية ثم الانتقال للصفحة
+            setTimeout(() => {
+                window.location.href = targetUrl;
+                             }, 500);
+                             });
+                        });
+                       });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="home.html" class="site-name">CODIFY</a>
+    </header>
+    <h1>Common courses</h1>
+    <div class="container">
+        <div class="circle-container">
+            <div class="circle circle1">Front-End</div>
+            <div class="circle circle2">Back-End</div>
+            <div class="shared">JavaScript</div>
+        </div>
+        <p class="description">JavaScript is used for both front-end and back-end development. It creates interactive web pages on the front-end and enables server-side programming with Node.js on the back-end.</p>
+
+        <div class="circle-container">
+            <div class="circle circle1">Cyber Security</div>
+            <div class="circle circle2">Data Science</div>
+            <div class="shared">Python</div>
+        </div>
+        <p class="description">Python is widely used in both Cyber Security and Data Science. In Cyber Security, it's used for scripting and building security tools. In Data Science, it's used for data analysis and machine learning.</p>
+
+        <div class="circle-container">
+            <div class="circle circle1">DevOps</div>
+            <div class="circle circle2">Cyber Security</div>
+            <div class="shared">Linux</div>
+        </div>
+        <p class="description">Linux is essential for both Cyber Security and DevOps. In Cyber Security, it's used for security testing and managing tools. In DevOps, it's used to manage servers and automate tasks.</p>
+
+        <div class="circle-container">
+            <div class="circle circle1">Front-End</div>
+            <div class="circle circle2">Mobile App</div>
+            <div class="shared">React</div>
+        </div>
+        <p class="description">React is used for building web interfaces (Front-End), while React Native allows you to build mobile apps for both iOS and Android using the same code.</p>
+    </div>
+</body>
+</html>
